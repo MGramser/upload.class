@@ -1,6 +1,6 @@
 # upload.class
 
-A Class to upload multiple sorts of files with PHP to a webserver
+<h1>A Class to upload multiple sorts of files with PHP to a webserver</h1>
 
 Usage in webdesign, html form
 
