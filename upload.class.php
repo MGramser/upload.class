@@ -1,5 +1,5 @@
 <?php
-// Class uploadFile by Max Gramser, version 21 july 2016
+// Class uploadFile by Max Gramser, version 8 septembre 2016
 // Use and config:
 
 /*
