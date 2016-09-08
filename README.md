@@ -1,10 +1,9 @@
 # upload.class
 
-<h1>A Class to upload multiple sorts of files with PHP to a webserver</h1>
+<h3>A Class to upload multiple sorts of files with PHP to a webserver, 
+Usage in webdesign, html form</h3>
 
-Usage in webdesign, html form
-
-Use and config:
+<h4>Use and config:</h4>
 
 // New instance of uploadFile
 
