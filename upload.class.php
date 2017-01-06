@@ -59,12 +59,12 @@ if($_FILES[ [forminput] ]['name'] != '') {
 
 
 // The messages that are returned by $this -> upload(), for front end use:
-define(ERRORTEXT_fileNotSupported, 'Bestandsextensie niet toegestaan, alleen toegestaan zijn:');
-define(ERRORTEXT_noImage, 'Bestandstype niet herkend, geen afbeelding geselecteerd');
-define(ERRORTEXT_tooBig, 'Bestand te groot, maximale grootte:');
-define(ERRORTEXT_pathFail, 'Het is niet gelukt om het bestand te uploaden naar');
-define(ERRORTEXT_noFileFound, 'Geen bestand gevonden om te uploaden..');
-define(UPLOADCLASS_SUCCES, 'succes');
+define('ERRORTEXT_fileNotSupported', 'Bestandsextensie niet toegestaan, alleen toegestaan zijn:');
+define('ERRORTEXT_noImage', 'Bestandstype niet herkend, geen afbeelding geselecteerd');
+define('ERRORTEXT_tooBig', 'Bestand te groot, maximale grootte:');
+define('ERRORTEXT_pathFail', 'Het is niet gelukt om het bestand te uploaden naar');
+define('ERRORTEXT_noFileFound', 'Geen bestand gevonden om te uploaden..');
+define('UPLOADCLASS_SUCCES', 'succes');
 
 
 
@@ -234,15 +234,20 @@ class uploadFile {
 				// if the photo is taken on a mobile phone in a rotated state, rotate back
 				$image = imagecreatefromjpeg($_FILES[$this->inputname]['tmp_name']);
 				
-				$exif = exif_read_data($_FILES[$this->inputname]['tmp_name']);
-				$orientation = $exif['Orientation'];
-		
-				if($orientation == 6){
-					$image = imagerotate($image, -90, 0);
-				} else if($orientation == 3){
-					$image = imagerotate($image, 180, 0);
-				} else if($orientation == 8){
-					$image = imagerotate($image, 90, 0);
+				if(extension_loaded("exif")){
+				
+					$exif = exif_read_data($_FILES[$this->inputname]['tmp_name']);
+					$orientation = $exif['Orientation'];
+			
+					if($orientation == 6){
+						$image = imagerotate($image, -90, 0);
+					} else if($orientation == 3){
+						$image = imagerotate($image, 180, 0);
+					} else if($orientation == 8){
+						$image = imagerotate($image, 90, 0);
+					}
+				} else {
+					$this -> debug[] = __LINE__.': Exif not loaded, can not detect rotated image from iPhone';
 				}
 				
 				$this -> debug[] = __LINE__.': Image created from jpg';
